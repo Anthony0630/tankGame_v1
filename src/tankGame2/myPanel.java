@@ -4,20 +4,39 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
+import java.util.Vector;
 
 // 为了监听键盘事件，需要实现 KeyListener
 public class myPanel extends JPanel implements KeyListener {
     // 定义 myTank
     tankGame2.myTank myTank = null;
+    // 定义敌人坦克，放入 Vector
+    Vector<enemyTank> enemyTanks = new Vector<>();
+    int enemyTankSize = 5;
+
+    Random r = new Random();   // 用来随机敌人坦克的速度
     public myPanel(){
         myTank = new myTank(100, 100);    // 初始化自己的坦克
-        myTank.setSpeed(5);
+        myTank.setSpeed(10);
+
+        for (int i = 0; i < enemyTankSize; i++) {
+            enemyTank enemytank = new enemyTank(100 * (i + 1), 0);
+            enemytank.setDirect(2);
+            enemytank.setSpeed(r.nextInt(9) + 1);  // 保证速度属于 [1, 10]
+            enemyTanks.add(enemytank);
+        }
     }
     @Override
     public void paint(Graphics g) {
         super.paint(g);
         g.fillRect(0, 0, 1000, 750); // 画出大背景矩形
         drawTank(myTank.getX(), myTank.getY(), g, myTank.getDirect(), 0);
+
+        // 画出敌人的坦克
+        for (enemyTank enemytank : enemyTanks) {
+            drawTank(enemytank.getX(), enemytank.getY(), g, enemytank.getDirect(), 1);
+        }
     }
 
     // 编写方法，画出坦克

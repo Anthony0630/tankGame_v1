@@ -6,7 +6,7 @@ public class chdTankGame_2 extends JFrame {
     // 定义 MyPanel
     myPanel mp = null;
     public static void main(String[] args) {
-        chdTankGame_2 chdtankGame1 = new chdTankGame_2();
+        chdTankGame_2 chdTankGame2 = new chdTankGame_2();
     }
     public chdTankGame_2(){
         mp = new myPanel();
