@@ -18,7 +18,7 @@ public class myPanel extends JPanel implements KeyListener {
     Random r = new Random();   // 用来随机敌人坦克的速度
     public myPanel(){
         myTank = new myTank(100, 100);    // 初始化自己的坦克
-        myTank.setSpeed(10);
+        myTank.setSpeed(15);
 
         for (int i = 0; i < enemyTankSize; i++) {
             enemyTank enemytank = new enemyTank(100 * (i + 1), 0);
@@ -31,7 +31,13 @@ public class myPanel extends JPanel implements KeyListener {
     public void paint(Graphics g) {
         super.paint(g);
         g.fillRect(0, 0, 1000, 750); // 画出大背景矩形
+        // 画出自己的坦克
         drawTank(myTank.getX(), myTank.getY(), g, myTank.getDirect(), 0);
+
+        // 画出myTank的子弹
+        if (myTank.shot != null && myTank.shot.isLive) {
+            g.fill3DRect(myTank.shot.x, myTank.shot.y, 1, 1, false);
+        }
 
         // 画出敌人的坦克
         for (enemyTank enemytank : enemyTanks) {
@@ -110,6 +116,11 @@ public class myPanel extends JPanel implements KeyListener {
         } else if (e.getKeyCode() == KeyEvent.VK_A) {
             myTank.setDirect(3);
             myTank.moveLeft();
+        }
+
+        // 如果用户按下的是J，就需要发射子弹
+        if (e.getKeyCode() == KeyEvent.VK_J) {
+            myTank.shotEnemyTank();
         }
         this.repaint();  // 重绘面板，调用paint方法，画出坦克
     }
