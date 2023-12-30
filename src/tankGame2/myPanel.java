@@ -8,7 +8,8 @@ import java.util.Random;
 import java.util.Vector;
 
 // 为了监听键盘事件，需要实现 KeyListener
-public class myPanel extends JPanel implements KeyListener {
+// 为了让 Panel 不停地重绘子弹，需要将 myPanel 实现Runnable 借口，当做线程使用
+public class myPanel extends JPanel implements KeyListener, Runnable{
     // 定义 myTank
     tankGame2.myTank myTank = null;
     // 定义敌人坦克，放入 Vector
@@ -36,7 +37,8 @@ public class myPanel extends JPanel implements KeyListener {
 
         // 画出myTank的子弹
         if (myTank.shot != null && myTank.shot.isLive) {
-            g.fill3DRect(myTank.shot.x, myTank.shot.y, 1, 1, false);
+//            g.fill3DRect(myTank.shot.x, myTank.shot.y, 1, 1, false);
+            g.draw3DRect(myTank.shot.x, myTank.shot.y, 1, 1, false);
         }
 
         // 画出敌人的坦克
@@ -128,5 +130,17 @@ public class myPanel extends JPanel implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    @Override
+    public void run() {    // 每隔一段时间，重绘区域，刷新绘图区域，让子弹动起来
+        while (true) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            this.repaint();  // 重绘面板
+        }
     }
 }

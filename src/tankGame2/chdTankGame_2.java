@@ -10,6 +10,8 @@ public class chdTankGame_2 extends JFrame {
     }
     public chdTankGame_2(){
         mp = new myPanel();
+        Thread thread = new Thread(mp);
+        thread.start();
         this.add(mp);
         this.setSize(1000, 750);
         this.addKeyListener(mp);
