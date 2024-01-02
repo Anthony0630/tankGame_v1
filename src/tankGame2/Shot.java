@@ -39,8 +39,7 @@ public class Shot implements Runnable{
                 default:
                     break;
             }
-            System.out.println("子弹 x = " + x + " y = " + y);
-            // 碰到边界，就break
+            // 碰到边界，就break；碰到敌人坦克，也 break
             if (!(x >= 0 && x <= 1000 && y >= 0 && y <= 750 && isLive)) {
                 isLive = false;
                 break;
