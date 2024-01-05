@@ -3,7 +3,7 @@ package tankGame2;
 public class Tank {
     private int x;    // 横坐标
     private int y;    // 纵坐标
-
+    boolean isLive = true;    // 坦克是否存活
     // ***************************控制坦克速度***************************
     private int speed = 1;    // 坦克速度
     public void setSpeed(int speed) {
