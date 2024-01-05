@@ -175,19 +175,19 @@ public class myPanel extends JPanel implements KeyListener, Runnable{
     }
 
     // 判断敌人坦克是否击中我方坦克
-    public void hitMyTank() {
-        // 遍历敌人坦克
-        for (int i = 0; i < enemyTanks.size(); i++) {
-            enemyTank enemytank = enemyTanks.get(i);
-            // 遍历我方坦克
-            for (int j = 0; j < myTank.shots.size(); j++) {
-                Shot shot = myTank.shots.get(j);
-                if (myTank.isLive && shot.isLive) {   // 当我方坦克还存活
-                    hitTank(shot, myTank);
-                }
-            }
-        }
-    }
+    // public void hitMyTank() {
+    //     // 遍历敌人坦克
+    //     for (int i = 0; i < enemyTanks.size(); i++) {
+    //         enemyTank enemytank = enemyTanks.get(i);
+    //         // 遍历我方坦克
+    //         for (int j = 0; j < myTank.shots.size(); j++) {
+    //             Shot shot = myTank.shots.get(j);
+    //             if (myTank.isLive && shot.isLive) {   // 当我方坦克还存活
+    //                 hitTank(shot, myTank);
+    //             }
+    //         }
+    //     }
+    // }
 
     public static void hitTank(Shot s, enemyTank enemytank) {     // 判断我方子弹是否击中敌方坦克， run 方法中判断
         // 判断 s 击中坦克
